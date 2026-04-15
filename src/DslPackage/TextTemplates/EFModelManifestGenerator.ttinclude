@@ -46,22 +46,6 @@
          }
 
          /// <summary>
-         /// Generates the manifest and writes it as a file via the Manager.
-         /// </summary>
-         /// <param name="manager">The file manager to use for output.</param>
-         /// <param name="outputDirectory">The output directory for the manifest file (relative to the project).</param>
-         public void Generate(Manager manager, string outputDirectory)
-         {
-            string manifestFileName = $"{modelRoot.EntityContainerName}.model-manifest.md";
-
-            string filePath = string.IsNullOrWhiteSpace(outputDirectory)
-                                 ? manifestFileName
-                                 : Path.Combine(outputDirectory, manifestFileName);
-
-            manager.StartNewFile(filePath);
-         }
-
-         /// <summary>
          /// Generates the full Markdown content of the model manifest.
          /// </summary>
          /// <returns>The Markdown string.</returns>

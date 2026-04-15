@@ -5,6 +5,7 @@
 #><#@ include file="EFCoreModelGenerator.ttinclude" once="true"
 #><#@ include file="EFModelFileManager.ttinclude" once="true"
 #><#@ include file="EFModelGenerator.ttinclude" once="true"
+#><#@ include file="EFModelManifestGenerator.ttinclude" once="true"
 #><#@ include file="VSIntegration.ttinclude" once="true"
 #><#@ assembly name="System.Core"
 #><#@ assembly name="System.Data.Linq"
@@ -71,6 +72,38 @@
          }
 
          generator.Generate(manager);
+      }
+
+      /// <summary>
+      /// Generates a Markdown model manifest file alongside the generated code.
+      /// The manifest provides a human-and-AI-readable summary of all entities,
+      /// properties, enums, relationships, inheritance hierarchies, and diagram structure.
+      /// The file is written directly to disk to avoid the C# header/footer that the
+      /// Manager applies to code blocks.
+      /// </summary>
+      /// <param name="manager">The file manager (used only for output path resolution).</param>
+      /// <param name="modelRoot">The model root containing the entity information.</param>
+      public void GenerateModelManifest(Manager manager, ModelRoot modelRoot)
+      {
+         EFModelManifestGenerator manifestGenerator = new EFModelManifestGenerator(modelRoot);
+
+         string outputDirectory = string.IsNullOrWhiteSpace(modelRoot.ContextOutputDirectory)
+                                     ? string.Empty
+                                     : modelRoot.ContextOutputDirectory;
+
+         string manifestFileName = $"{modelRoot.EntityContainerName}.model-manifest.md";
+
+         string filePath = string.IsNullOrWhiteSpace(outputDirectory)
+                              ? Path.Combine(manager.OutputPath, manifestFileName)
+                              : Path.Combine(manager.OutputPath, outputDirectory, manifestFileName);
+
+         string directory = Path.GetDirectoryName(filePath);
+
+         if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+            Directory.CreateDirectory(directory);
+
+         string content = manifestGenerator.GenerateManifestContent();
+         File.WriteAllText(filePath, content);
       }
 
 

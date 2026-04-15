@@ -3,6 +3,7 @@
    - Better detection of principal/dependent roles in assembly parser
    - Removed "dbo" as default schema in design surface properties. Not specifying will allow the database to use whatever default schema is appropriate for it.
    - Corrected some deficits in how column name overrides were being handled in EFCore
+   - Added model manifest generation: a Markdown file is now auto-generated alongside C# code, providing a human-and-AI-readable summary of the entire model (entities, properties, enums, relationships, inheritance hierarchies, and diagrams). See https://github.com/msawczyn/EFDesigner2022/issues/115
 
 4.2.7
    - Support for per-entity inheritance in EF7

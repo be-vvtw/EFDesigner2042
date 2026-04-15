@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -34,22 +32,6 @@ namespace Sawczyn.EFDesigner.EFModel.EditingOnly
          public EFModelManifestGenerator(ModelRoot modelRoot)
          {
             this.modelRoot = modelRoot ?? throw new ArgumentNullException(nameof(modelRoot));
-         }
-
-         /// <summary>
-         /// Generates the manifest and writes it as a file via the Manager.
-         /// </summary>
-         /// <param name="manager">The file manager to use for output.</param>
-         /// <param name="outputDirectory">The output directory for the manifest file (relative to the project).</param>
-         public void Generate(Manager manager, string outputDirectory)
-         {
-            string manifestFileName = $"{modelRoot.EntityContainerName}.model-manifest.md";
-
-            string filePath = string.IsNullOrWhiteSpace(outputDirectory)
-                                 ? manifestFileName
-                                 : Path.Combine(outputDirectory, manifestFileName);
-
-            manager.StartNewFile(filePath);
          }
 
          /// <summary>

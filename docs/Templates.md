@@ -63,4 +63,4 @@ to do anything else you need to do in the constructor.</td></tr>
 </table>
 
 ### Next Step 
-[Customizing Code Generation](Customizing)
+[Model Manifest](ModelManifest)
