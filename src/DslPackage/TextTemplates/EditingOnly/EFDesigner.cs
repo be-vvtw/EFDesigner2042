@@ -46,6 +46,7 @@ namespace Sawczyn.EFDesigner.EFModel.EditingOnly
 
       /// <summary>
       /// Writes text to the output without appending a new line.
+      /// Stub for T4 runtime compatibility - provided by GeneratedTextTransformation base class at runtime.
       /// </summary>
       /// <param name="textToAppend">The text to be written.</param>
       public void Write(string textToAppend) { }
