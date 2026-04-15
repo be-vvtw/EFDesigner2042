@@ -50,5 +50,8 @@
 
    }
 
+   // Generate model manifest (human-and-AI-readable model summary)
+   GenerateModelManifest(manager, ModelRoot);
+
    manager.Process(true);
 #>
