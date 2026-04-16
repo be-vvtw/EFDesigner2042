@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 
 using Microsoft.VisualStudio.TextTemplating;
 
@@ -42,6 +43,13 @@ namespace Sawczyn.EFDesigner.EFModel.EditingOnly
       /// </summary>
       /// <param name="textToAppend">The text to be written.</param>
       public void WriteLine(string textToAppend) { }
+
+      /// <summary>
+      /// Writes text to the output without appending a new line.
+      /// Stub for T4 runtime compatibility - provided by GeneratedTextTransformation base class at runtime.
+      /// </summary>
+      /// <param name="textToAppend">The text to be written.</param>
+      public void Write(string textToAppend) { }
 
       #region Template
 
@@ -94,6 +102,38 @@ namespace Sawczyn.EFDesigner.EFModel.EditingOnly
          }
 
          generator.Generate(manager);
+      }
+
+      /// <summary>
+      /// Generates a Markdown model manifest file alongside the generated code.
+      /// The manifest provides a human-and-AI-readable summary of all entities,
+      /// properties, enums, relationships, inheritance hierarchies, and diagram structure.
+      /// The file is written directly to disk to avoid the C# header/footer that the
+      /// Manager applies to code blocks.
+      /// </summary>
+      /// <param name="manager">The file manager (used only for output path resolution).</param>
+      /// <param name="modelRoot">The model root containing the entity information.</param>
+      public void GenerateModelManifest(Manager manager, ModelRoot modelRoot)
+      {
+         EFModelManifestGenerator manifestGenerator = new EFModelManifestGenerator(modelRoot);
+
+         string outputDirectory = string.IsNullOrWhiteSpace(modelRoot.ContextOutputDirectory)
+                                     ? string.Empty
+                                     : modelRoot.ContextOutputDirectory;
+
+         string manifestFileName = $"{modelRoot.EntityContainerName}.model-manifest.md";
+
+         string filePath = string.IsNullOrWhiteSpace(outputDirectory)
+                              ? Path.Combine(manager.OutputPath, manifestFileName)
+                              : Path.Combine(manager.OutputPath, outputDirectory, manifestFileName);
+
+         string directory = Path.GetDirectoryName(filePath);
+
+         if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+            Directory.CreateDirectory(directory);
+
+         string content = manifestGenerator.GenerateManifestContent();
+         File.WriteAllText(filePath, content);
       }
 
 #endregion Template

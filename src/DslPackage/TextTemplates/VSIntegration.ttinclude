@@ -5,6 +5,7 @@
 #><#@ include file="EFCoreModelGenerator.ttinclude" once="true"
 #><#@ include file="EFModelFileManager.ttinclude" once="true"
 #><#@ include file="EFModelGenerator.ttinclude" once="true"
+#><#@ include file="EFModelManifestGenerator.ttinclude" once="true"
 #><#@ include file="VSIntegration.ttinclude" once="true"
 #><#@ assembly name="System.Core"
 #><#@ assembly name="System.Data.Linq"

@@ -18,6 +18,7 @@
 - Code-first C# code generation for both EF6 and EFCore v2 via T4 templates
   - Easy overrides for parts or all of the code generation
   - Partial classes generated for easy customization
+  - Auto-generated [model manifest](ModelManifest) (Markdown) for AI assistant and documentation use
   - Use the Visual Studio property editor to configure:
     - EF version
     - Output directories

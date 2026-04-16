@@ -8,6 +8,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[Enumerations](https://github.com/msawczyn/EFDesigner/wiki/Enumerations)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[Adding Model Comments](https://github.com/msawczyn/EFDesigner/wiki/Comments)<br/>
 [Generating Code](https://github.com/msawczyn/EFDesigner/wiki/Templates)<br/>
+[Model Manifest](https://github.com/msawczyn/EFDesigner/wiki/ModelManifest)<br/>
 [Customizing Code Generation](https://github.com/msawczyn/EFDesigner/wiki/Customizing)<br/>
 [Contributing](https://github.com/msawczyn/EFDesigner/wiki/Development)<br/>
 [License](https://github.com/msawczyn/EFDesigner/wiki/License)<br/>
